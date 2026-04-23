@@ -18,6 +18,10 @@ const config: Config = {
           DEFAULT: "#D4AF37", // Gold
         }
       },
+      fontFamily: {
+        sans: ['var(--font-inter)', 'sans-serif'],
+        serif: ['var(--font-playfair)', 'serif'],
+      },
     },
   },
   plugins: [
