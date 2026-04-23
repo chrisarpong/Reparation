@@ -93,16 +93,14 @@ export default function LandingPage() {
       >
         <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
           
-          {/* Logo & Ministry Name */}
-          <div className="flex items-center gap-3 text-white">
-            {/* PLACEHOLDER FOR MINISTRY LOGO - Replace the src with your actual logo path */}
-            <div className="w-10 h-10 bg-orange-500 rounded flex items-center justify-center font-bold text-xs">
-              LOGO
-            </div>
-            <div className="font-bold text-lg hidden sm:block">
-              Ministry of Foreign Affairs
-            </div>
-          </div>
+          {/* Official Ministry Logo */}
+          <Link href="/" className="flex items-center z-50">
+            <img 
+              src="/assets/MFA LOGO 2.png" 
+              alt="Ministry of Foreign Affairs, Republic of Ghana" 
+              className="h-12 md:h-16 w-auto object-contain drop-shadow-md scale-[1.0] md:scale-[1.5] origin-left"
+            />
+          </Link>
 
           {/* Navigation */}
           <nav className="hidden md:flex items-center gap-8 text-sm text-gray-200">
@@ -114,7 +112,7 @@ export default function LandingPage() {
           {/* CTA */}
           <div className="flex items-center gap-4">
             <Link
-              href="/register"
+              href="/en/register"
               className="bg-orange-500 hover:bg-orange-600 text-white px-5 py-2.5 rounded-md text-sm font-medium transition-colors shadow-[0_0_15px_rgba(249,115,22,0.3)]"
             >
               Register
@@ -155,7 +153,7 @@ export default function LandingPage() {
           {/* Actions */}
           <div className="flex flex-wrap items-center gap-6">
             <Link
-              href="/register"
+              href="/en/register"
               className="bg-orange-500 hover:bg-orange-600 text-white px-8 py-4 rounded-md font-bold text-lg transition-all shadow-[0_0_20px_rgba(249,115,22,0.4)] flex items-center gap-2 group"
             >
               Register Now
@@ -543,7 +541,7 @@ export default function LandingPage() {
             <div>
               <h4 className="text-white font-semibold mb-6 drop-shadow-md">Get Involved</h4>
               <ul className="space-y-4 text-sm">
-                <li><Link href="/register" className="hover:text-orange-500 transition-colors drop-shadow-sm">Delegate Registration</Link></li>
+                <li><Link href="/en/register" className="hover:text-orange-500 transition-colors drop-shadow-sm">Delegate Registration</Link></li>
                 <li><a href="#" className="hover:text-orange-500 transition-colors drop-shadow-sm">Media Accreditation</a></li>
                 <li><a href="#" className="hover:text-orange-500 transition-colors drop-shadow-sm">Travel & Visa Advisory</a></li>
                 <li><a href="#" className="hover:text-orange-500 transition-colors drop-shadow-sm">Protocol Guidelines</a></li>
