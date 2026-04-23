@@ -22,6 +22,7 @@ INSTALLED_APPS = [
     
     # Local
     'registrations',
+    'rest_framework_simplejwt',
 ]
 
 MIDDLEWARE = [
@@ -78,6 +79,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # REST Framework settings
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
         'rest_framework.authentication.SessionAuthentication',
     ),
     'DEFAULT_THROTTLE_CLASSES': [
@@ -91,12 +93,12 @@ REST_FRAMEWORK = {
 }
 
 # CORS Settings
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",
-]
-CSRF_TRUSTED_ORIGINS = [
-    "http://localhost:3000",
-]
+cors_origins_env = os.getenv('CORS_ALLOWED_ORIGINS', 'http://localhost:3000')
+csrf_origins_env = os.getenv('CSRF_TRUSTED_ORIGINS', 'http://localhost:3000')
+
+CORS_ALLOWED_ORIGINS = cors_origins_env.split(',')
+CSRF_TRUSTED_ORIGINS = csrf_origins_env.split(',')
+CORS_ALLOW_CREDENTIALS = True
 
 # Internationalization
 LANGUAGE_CODE = "en"
@@ -111,3 +113,6 @@ TIME_ZONE = 'UTC'
 STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+import os
+RESEND_API_KEY = os.getenv('RESEND_API_KEY', 'dummy_key')

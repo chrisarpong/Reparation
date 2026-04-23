@@ -17,6 +17,12 @@ export async function fetchApi(endpoint: string, options: RequestInit = {}) {
     if (csrfToken && !headers.has('X-CSRFToken')) {
       headers.set('X-CSRFToken', csrfToken);
     }
+    
+    // Add JWT Token from localStorage if present
+    const accessToken = localStorage.getItem('access_token');
+    if (accessToken && !headers.has('Authorization')) {
+      headers.set('Authorization', `Bearer ${accessToken}`);
+    }
   }
 
   const response = await fetch(`${API_BASE_URL}${endpoint}`, {

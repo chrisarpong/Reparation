@@ -1,5 +1,5 @@
 from rest_framework.generics import CreateAPIView, ListAPIView, RetrieveUpdateAPIView
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import AllowAny, IsAuthenticated
 from .models import Registration
 from .serializers import PublicRegistrationSerializer, AdminRegistrationSerializer
 from .permissions import IsRegistrationViewer, IsRegistrationEditor
@@ -19,7 +19,7 @@ class AdminRegistrationListView(ListAPIView):
     """
     queryset = Registration.objects.all().order_by("-created_at")
     serializer_class = AdminRegistrationSerializer
-    permission_classes = [IsRegistrationViewer]
+    permission_classes = [IsAuthenticated]
 
 class AdminRegistrationDetailView(RetrieveUpdateAPIView):
     """
@@ -27,4 +27,4 @@ class AdminRegistrationDetailView(RetrieveUpdateAPIView):
     """
     queryset = Registration.objects.all().order_by("-created_at")
     serializer_class = AdminRegistrationSerializer
-    permission_classes = [IsRegistrationEditor]
+    permission_classes = [IsAuthenticated]

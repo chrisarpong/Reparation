@@ -3,8 +3,11 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import React from "react";
+import { useTranslations, useLocale } from "next-intl";
 
 export default function LandingPage() {
+  const t = useTranslations("Index");
+  const locale = useLocale();
   const [isScrolled, setIsScrolled] = useState(false);
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
@@ -18,20 +21,20 @@ export default function LandingPage() {
 
   const faqs = [
     {
-      question: "What is the Global Reparatory Justice Programme?",
-      answer: "It is an official platform convened by the Government of Ghana to unite international stakeholders, policymakers, and the global diaspora in advancing reparative justice frameworks."
+      question: t('faq_q1'),
+      answer: t('faq_a1')
     },
     {
-      question: "Who can register as a delegate?",
-      answer: "Registration is open to government officials, diplomats, academic researchers, cultural institutions, and recognized diaspora organization leaders."
+      question: t('faq_q2'),
+      answer: t('faq_a2')
     },
     {
-      question: "When and where is the programme happening?",
-      answer: "The main summit events will be hosted in Accra, Ghana on the 24th of April 2026. Specific venue details will be provided upon registration approval."
+      question: t('faq_q3'),
+      answer: t('faq_a3')
     },
     {
-      question: "Is there a fee to participate?",
-      answer: "Official delegate participation is fully facilitated by the hosting organizations. However, attendees are responsible for their own travel, visa, and accommodation logistics."
+      question: t('faq_q4'),
+      answer: t('faq_a4')
     }
   ];
 
@@ -102,21 +105,30 @@ export default function LandingPage() {
             />
           </Link>
 
-          {/* Navigation */}
-          <nav className="hidden md:flex items-center gap-8 text-sm text-gray-200">
-            <a href="#about" className="hover:text-white transition-colors">About</a>
-            <a href="#focus" className="hover:text-white transition-colors">Programme Focus</a>
-            <a href="#participate" className="hover:text-white transition-colors">Participate</a>
-          </nav>
+          {/* Desktop Navigation & Actions */}
+          <div className="hidden lg:flex items-center gap-8">
+            <nav className="flex items-center gap-6 text-sm font-medium text-slate-300">
+              <a href="#about" className="hover:text-white transition-colors">{t('nav_about')}</a>
+              <a href="#focus" className="hover:text-white transition-colors">{t('nav_focus')}</a>
+              <a href="#participate" className="hover:text-white transition-colors">{t('nav_participate')}</a>
+            </nav>
+            
+            <div className="flex items-center gap-6 border-l border-white/10 pl-6">
+              
+              {/* --- NEW: LANGUAGE SWITCHER --- */}
+              <div className="flex items-center gap-3 text-xs font-bold tracking-widest">
+                <Link href="/en" className="text-orange-500 hover:text-orange-400 transition-colors">EN</Link>
+                <span className="text-white/20">|</span>
+                <Link href="/fr" className="text-slate-400 hover:text-white transition-colors">FR</Link>
+              </div>
 
-          {/* CTA */}
-          <div className="flex items-center gap-4">
-            <Link
-              href="/en/register"
-              className="bg-orange-500 hover:bg-orange-600 text-white px-5 py-2.5 rounded-md text-sm font-medium transition-colors shadow-[0_0_15px_rgba(249,115,22,0.3)]"
-            >
-              Register
-            </Link>
+              <Link 
+                href={`/${locale}/register`} 
+                className="bg-orange-600 hover:bg-orange-500 text-white px-6 py-2.5 rounded shadow-[0_0_15px_rgba(234,88,12,0.3)] transition-all font-semibold tracking-wide"
+              >
+                {t('nav_register')}
+              </Link>
+            </div>
           </div>
         </div>
       </header>
@@ -132,38 +144,35 @@ export default function LandingPage() {
           
           {/* Meta badge */}
           <div className="inline-flex items-center gap-3 bg-white/10 border border-white/10 px-4 py-2 rounded-full text-sm text-gray-200 mb-8 w-fit">
-            <span className="text-orange-400">📍 Accra, Ghana</span>
+            <span className="text-orange-400">📍 {t('location_badge').split(' • ')[0]}</span>
             <span className="opacity-50">•</span>
-            <span>Global Programme</span>
+            <span>{t('location_badge').split(' • ')[1]}</span>
           </div>
 
           {/* Headline */}
           <h1 className="text-5xl md:text-7xl font-extrabold leading-tight max-w-4xl mb-6 tracking-tight">
-            Advancing Global Dialogue on <br /> 
-            <span className="text-orange-500 drop-shadow-[0_0_20px_rgba(249,115,22,0.2)]"> Reparatory Justice</span>
+            {t('title')}
           </h1>
 
           {/* Subtitle */}
           <p className="text-lg md:text-xl text-gray-300 max-w-2xl mb-10 font-light leading-relaxed">
-            An official programme convened by the Ministry of Foreign Affairs,
-            Republic of Ghana, to coordinate international engagement on
-            reparatory justice frameworks and action.
+            {t('subtitle')}
           </p>
 
           {/* Actions */}
           <div className="flex flex-wrap items-center gap-6">
             <Link
-              href="/en/register"
+              href={`/${locale}/register`}
               className="bg-orange-500 hover:bg-orange-600 text-white px-8 py-4 rounded-md font-bold text-lg transition-all shadow-[0_0_20px_rgba(249,115,22,0.4)] flex items-center gap-2 group"
             >
-              Register Now
+              {t('cta_register')}
               <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
               </svg>
             </Link>
 
             <a href="#about" className="text-sm font-semibold tracking-widest uppercase hover:text-orange-400 transition-colors flex items-center gap-2">
-              Learn more
+              {t('cta_learn')}
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
               </svg>
@@ -179,25 +188,25 @@ export default function LandingPage() {
             <span className="text-4xl md:text-6xl font-light text-orange-500 font-serif tabular-nums tracking-tighter">
               {String(timeLeft.days).padStart(2, '0')}
             </span>
-            <span className="text-xs tracking-[0.2em] text-gray-400 mt-3 font-semibold uppercase">Days</span>
+            <span className="text-xs tracking-[0.2em] text-gray-400 mt-3 font-semibold uppercase">{t('countdown_days')}</span>
           </div>
           <div className="flex flex-col items-center">
             <span className="text-4xl md:text-6xl font-light text-orange-500 font-serif tabular-nums tracking-tighter">
               {String(timeLeft.hours).padStart(2, '0')}
             </span>
-            <span className="text-xs tracking-[0.2em] text-gray-400 mt-3 font-semibold uppercase">Hours</span>
+            <span className="text-xs tracking-[0.2em] text-gray-400 mt-3 font-semibold uppercase">{t('countdown_hours')}</span>
           </div>
           <div className="flex flex-col items-center">
             <span className="text-4xl md:text-6xl font-light text-orange-500 font-serif tabular-nums tracking-tighter">
               {String(timeLeft.minutes).padStart(2, '0')}
             </span>
-            <span className="text-xs tracking-[0.2em] text-gray-400 mt-3 font-semibold uppercase">Minutes</span>
+            <span className="text-xs tracking-[0.2em] text-gray-400 mt-3 font-semibold uppercase">{t('countdown_minutes')}</span>
           </div>
           <div className="flex flex-col items-center">
             <span className="text-4xl md:text-6xl font-light text-orange-500 font-serif tabular-nums tracking-tighter">
               {String(timeLeft.seconds).padStart(2, '0')}
             </span>
-            <span className="text-xs tracking-[0.2em] text-gray-400 mt-3 font-semibold uppercase">Seconds</span>
+            <span className="text-xs tracking-[0.2em] text-gray-400 mt-3 font-semibold uppercase">{t('countdown_seconds')}</span>
           </div>
         </div>
       </section>
@@ -231,7 +240,7 @@ export default function LandingPage() {
         <div className="max-w-6xl mx-auto px-6 relative z-10">
           
           <h2 className="text-4xl md:text-5xl font-extrabold text-center mb-20 tracking-tight leading-tight">
-            Distinguished <span className="text-orange-500">Convener & Patronage</span>
+            {t('leadership_title_1')}<span className="text-orange-500">{t('leadership_title_2')}</span>
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-x-12 gap-y-16">
@@ -256,7 +265,7 @@ export default function LandingPage() {
               
               {/* Details (Centered below the new square frame) */}
               <h4 className="font-extrabold text-2xl tracking-tight mb-2 text-center text-white">H.E. John Dramani Mahama</h4>
-              <p className="text-orange-400 font-semibold text-sm tracking-widest uppercase text-center">President of the Republic of Ghana</p>
+              <p className="text-orange-400 font-semibold text-sm tracking-widest uppercase text-center">{t('president_title')}</p>
             </div>
 
             {/* CARD 2 - H.E. THE VICE PRESIDENT (Naana Jane Opoku-Agyemang) */}
@@ -273,7 +282,7 @@ export default function LandingPage() {
               </div>
               
               <h4 className="font-extrabold text-2xl tracking-tight mb-2 text-center text-white">H.E. Naana Jane Opoku-Agyemang</h4>
-              <p className="text-orange-400 font-semibold text-sm tracking-widest uppercase text-center">Vice President of the Republic of Ghana</p>
+              <p className="text-orange-400 font-semibold text-sm tracking-widest uppercase text-center">{t('vp_title')}</p>
             </div>
 
             {/* CARD 3 - THE HON. MINISTER (Hon. Samuel Okudzeto Ablakwa) */}
@@ -290,7 +299,7 @@ export default function LandingPage() {
               </div>
               
               <h4 className="font-extrabold text-2xl tracking-tight mb-2 text-center text-white leading-tight">Hon. Samuel Okudzeto Ablakwa</h4>
-              <p className="text-orange-400 font-semibold text-sm tracking-widest uppercase text-center leading-tight">Minister for Foreign Affairs</p>
+              <p className="text-orange-400 font-semibold text-sm tracking-widest uppercase text-center leading-tight">{t('minister_title')}</p>
             </div>
 
           </div>
@@ -304,7 +313,7 @@ export default function LandingPage() {
           {/* Section Heading */}
           <div className="text-center mb-20">
             <h2 className="text-3xl md:text-4xl font-extrabold text-white uppercase tracking-widest mb-4 drop-shadow-md">
-              Global Reparatory Justice Programme
+              {t('about_title')}
             </h2>
             {/* Subtle decorative line matching our theme colors */}
             <div className="h-1 w-24 mx-auto flex rounded-full overflow-hidden shadow-[0_0_10px_rgba(249,115,22,0.5)]">
@@ -330,7 +339,7 @@ export default function LandingPage() {
                     HON. SAMUEL OKUDZETO ABLAKWA
                   </h3>
                   <p className="text-[10px] font-bold text-slate-500 uppercase tracking-[0.2em]">
-                    Minister for Foreign Affairs
+                    {t('minister_title')}
                   </p>
                 </div>
               </div>
@@ -339,10 +348,10 @@ export default function LandingPage() {
             {/* Right Column: Text Content (Spans 7 columns) */}
             <div className="lg:col-span-7 space-y-6 text-slate-300 text-lg md:text-xl font-light leading-relaxed max-w-2xl">
               <p>
-                The Global Reparatory Justice Programme is an official platform convened by the Ministry of Foreign Affairs, Republic of Ghana, to advance a united call for reparative justice, healing, and the restoration of dignity for Africans and people of African descent worldwide.
+                {t('about_p1')}
               </p>
               <p>
-                Rooted in the understanding that the legacies of historical injustice continue to shape contemporary economic and social conditions, the Programme engages Heads of State, diplomats, thought leaders, and diaspora communities in charting a future grounded in justice, economic equity, and international cooperation.
+                {t('about_p2')}
               </p>
               
               <div className="pt-8">
@@ -350,7 +359,7 @@ export default function LandingPage() {
                   href="#focus" 
                   className="inline-flex items-center gap-2 bg-orange-600 hover:bg-orange-500 text-white font-bold text-sm tracking-wide px-8 py-3.5 rounded-full transition-all shadow-[0_0_15px_rgba(249,115,22,0.3)] hover:shadow-[0_0_25px_rgba(249,115,22,0.5)]"
                 >
-                  READ MORE
+                  {t('about_read_more')}
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" /></svg>
                 </a>
               </div>
@@ -369,12 +378,12 @@ export default function LandingPage() {
             <div className="flex items-center gap-4 mb-6">
               <div className="w-8 h-0.5 bg-orange-500"></div>
               <span className="text-orange-500 text-xs font-bold tracking-[0.2em] uppercase">
-                Everything you need to know
+                {t('faq_eyebrow')}
               </span>
             </div>
             <h2 className="text-4xl md:text-5xl font-light text-white tracking-tight font-serif">
-              Frequently Asked <br />
-              <span className="font-extrabold text-slate-300 font-sans">Questions</span>
+              {t('faq_title_1')}<br />
+              <span className="font-extrabold text-slate-300 font-sans">{t('faq_title_2')}</span>
             </h2>
           </div>
 
@@ -422,19 +431,19 @@ export default function LandingPage() {
           {/* Eyebrow */}
           <div className="flex items-center justify-center gap-4 mb-6">
             <div className="w-8 h-0.5 bg-orange-500"></div>
-            <span className="text-orange-500 text-xs font-bold tracking-[0.2em] uppercase">
-              Stay in the loop
-            </span>
+              <span className="text-orange-500 text-xs font-bold tracking-[0.2em] uppercase">
+                {t('newsletter_eyebrow')}
+              </span>
           </div>
 
           {/* Heading */}
           <h2 className="text-4xl md:text-5xl font-light text-white tracking-tight font-serif mb-4 drop-shadow-sm">
-            Join the Global <span className="font-extrabold font-sans text-slate-200">Dialogue</span>
+            {t('newsletter_title_1')}<span className="font-extrabold font-sans text-slate-200">{t('newsletter_title_2')}</span>
           </h2>
 
           {/* Subheading */}
           <p className="text-slate-400 mb-10 text-lg font-light leading-relaxed">
-            Be first to know: programme announcements, speaker reveals, and official registration updates.
+            {t('newsletter_subtitle')}
           </p>
 
           {/* Form Container */}
@@ -444,7 +453,7 @@ export default function LandingPage() {
             <div className="flex flex-col sm:flex-row w-full gap-4">
               <input
                 type="email"
-                placeholder="Enter Your Email Address"
+                placeholder={t('newsletter_placeholder')}
                 className="flex-1 bg-[#030914] border border-white/10 rounded-lg px-6 py-4 text-white placeholder:text-slate-500 focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 transition-all shadow-inner"
                 required
               />
@@ -452,7 +461,7 @@ export default function LandingPage() {
                 type="submit"
                 className="bg-orange-600 hover:bg-orange-500 text-white font-bold tracking-wide px-10 py-4 rounded-lg shadow-[0_0_15px_rgba(234,88,12,0.2)] hover:shadow-[0_0_25px_rgba(234,88,12,0.4)] transition-all whitespace-nowrap"
               >
-                SIGN UP
+                {t('newsletter_button')}
               </button>
             </div>
 
@@ -465,13 +474,13 @@ export default function LandingPage() {
                 defaultChecked
               />
               <label htmlFor="updates" className="cursor-pointer select-none">
-                Keep me updated on programme news and exclusive announcements
+                {t('newsletter_checkbox')}
               </label>
             </div>
 
             {/* Disclaimer */}
             <p className="text-xs text-slate-500 mt-2">
-              Note: You can opt-out at any time. See our <a href="#" className="underline hover:text-slate-300 transition-colors">Privacy Policy</a> and <a href="#" className="underline hover:text-slate-300 transition-colors">Terms & Conditions</a>.
+              {t('newsletter_disclaimer_1')}<a href="#" className="underline hover:text-slate-300 transition-colors">{t('newsletter_disclaimer_privacy')}</a>{t('newsletter_disclaimer_2')}<a href="#" className="underline hover:text-slate-300 transition-colors">{t('newsletter_disclaimer_terms')}</a>{t('newsletter_disclaimer_3')}
             </p>
           </form>
 
@@ -504,11 +513,11 @@ export default function LandingPage() {
                   GH
                 </div>
                 <div className="font-bold text-lg leading-tight">
-                  Global Reparatory <br/> Justice Programme
+                  {t('footer_title')}
                 </div>
               </div>
               <p className="text-sm text-slate-400 leading-relaxed pr-4 drop-shadow-sm">
-                Where diplomacy meets historical justice. Join the premier global convening shaping the future of reparative frameworks and international cooperation.
+                {t('footer_desc')}
               </p>
               
               {/* Social Media Buttons */}
@@ -528,33 +537,33 @@ export default function LandingPage() {
 
             {/* Column 2: The Agenda Links */}
             <div>
-              <h4 className="text-white font-semibold mb-6 drop-shadow-md">The Agenda</h4>
+              <h4 className="text-white font-semibold mb-6 drop-shadow-md">{t('footer_agenda')}</h4>
               <ul className="space-y-4 text-sm">
-                <li><a href="#" className="hover:text-orange-500 transition-colors drop-shadow-sm">Programme Overview</a></li>
-                <li><a href="#" className="hover:text-orange-500 transition-colors drop-shadow-sm">Distinguished Speakers</a></li>
-                <li><a href="#" className="hover:text-orange-500 transition-colors drop-shadow-sm">Thematic Tracks</a></li>
-                <li><a href="#" className="hover:text-orange-500 transition-colors drop-shadow-sm">Official Schedule</a></li>
+                <li><a href="#" className="hover:text-orange-500 transition-colors drop-shadow-sm">{t('footer_overview')}</a></li>
+                <li><a href="#" className="hover:text-orange-500 transition-colors drop-shadow-sm">{t('footer_speakers')}</a></li>
+                <li><a href="#" className="hover:text-orange-500 transition-colors drop-shadow-sm">{t('footer_tracks')}</a></li>
+                <li><a href="#" className="hover:text-orange-500 transition-colors drop-shadow-sm">{t('footer_schedule')}</a></li>
               </ul>
             </div>
 
             {/* Column 3: Get Involved Links */}
             <div>
-              <h4 className="text-white font-semibold mb-6 drop-shadow-md">Get Involved</h4>
+              <h4 className="text-white font-semibold mb-6 drop-shadow-md">{t('footer_involved')}</h4>
               <ul className="space-y-4 text-sm">
-                <li><Link href="/en/register" className="hover:text-orange-500 transition-colors drop-shadow-sm">Delegate Registration</Link></li>
-                <li><a href="#" className="hover:text-orange-500 transition-colors drop-shadow-sm">Media Accreditation</a></li>
-                <li><a href="#" className="hover:text-orange-500 transition-colors drop-shadow-sm">Travel & Visa Advisory</a></li>
-                <li><a href="#" className="hover:text-orange-500 transition-colors drop-shadow-sm">Protocol Guidelines</a></li>
+                <li><Link href={`/${locale}/register`} className="hover:text-orange-500 transition-colors drop-shadow-sm">{t('footer_del_reg')}</Link></li>
+                <li><a href="#" className="hover:text-orange-500 transition-colors drop-shadow-sm">{t('footer_media')}</a></li>
+                <li><a href="#" className="hover:text-orange-500 transition-colors drop-shadow-sm">{t('footer_travel')}</a></li>
+                <li><a href="#" className="hover:text-orange-500 transition-colors drop-shadow-sm">{t('footer_protocol')}</a></li>
               </ul>
             </div>
 
             {/* Column 4: Contact Information */}
             <div>
-              <h4 className="text-white font-semibold mb-6 drop-shadow-md">Secretariat Contact</h4>
+              <h4 className="text-white font-semibold mb-6 drop-shadow-md">{t('footer_contact')}</h4>
               <ul className="space-y-4 text-sm text-slate-400">
                 <li className="flex items-start gap-3 drop-shadow-sm">
                   <svg className="w-5 h-5 text-orange-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.243-4.243a8 8 0 1111.314 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
-                  <span>Ministry of Foreign Affairs<br/>Airport Residential Area<br/>Accra, Ghana</span>
+                  <span>{t('footer_address_1')}<br/>{t('footer_address_2')}<br/>{t('footer_address_3')}</span>
                 </li>
                 <li className="flex items-center gap-3 drop-shadow-sm">
                   <svg className="w-5 h-5 text-orange-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg>
@@ -575,15 +584,15 @@ export default function LandingPage() {
 
           {/* Bottom Copyright & Legal Bar */}
           <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-slate-500 relative z-10">
-            <div>&copy; {new Date().getFullYear()} Ministry of Foreign Affairs, Republic of Ghana. All rights reserved.</div>
+            <div>&copy; {new Date().getFullYear()}{t('footer_copyright')}</div>
             
             <div className="flex gap-6">
-              <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
-              <a href="#" className="hover:text-white transition-colors">Terms & Conditions</a>
+              <a href="#" className="hover:text-white transition-colors">{t('newsletter_disclaimer_privacy')}</a>
+              <a href="#" className="hover:text-white transition-colors">{t('newsletter_disclaimer_terms')}</a>
             </div>
 
             <div className="flex items-center gap-2">
-              Engineered by the <span className="text-slate-300 font-medium tracking-wide">ICT Bureau, MFA</span>
+              {t('footer_engineered')}<span className="text-slate-300 font-medium tracking-wide">{t('footer_ict')}</span>
             </div>
           </div>
 
