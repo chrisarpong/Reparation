@@ -247,8 +247,8 @@ export default function LandingPage() {
 
             {/* CARD 1 - H.E. THE PRESIDENT (John Dramani Mahama) */}
             <div className="flex flex-col items-center group">
-              {/* Substantial Square Block with Subtle Interactivity */}
-              <div className="w-80 h-80 mb-10 overflow-hidden rounded-xl border border-white/10 shadow-xl group-hover:scale-105 group-hover:shadow-2xl group-hover:shadow-orange-500/20 transition-all duration-300 relative bg-slate-800">
+              {/* Substantial Tall Block with Subtle Interactivity */}
+              <div className="w-80 h-96 mb-10 overflow-hidden rounded-xl border border-white/10 shadow-xl group-hover:scale-105 group-hover:shadow-2xl group-hover:shadow-orange-500/20 transition-all duration-300 relative bg-slate-800">
                 
                 {/* Subtle internal border glow on hover */}
                 <div className="absolute inset-0 rounded-xl border border-orange-500/0 group-hover:border-orange-500/30 transition-all duration-300 z-10"></div>
@@ -258,7 +258,7 @@ export default function LandingPage() {
                   <img 
                     src="/assets/2.png" 
                     alt="His Excellency John Dramani Mahama" 
-                    className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-300" 
+                    className="w-full h-full object-cover object-top transition-all duration-300" 
                   />
                 </div>
               </div>
@@ -270,13 +270,13 @@ export default function LandingPage() {
 
             {/* CARD 2 - H.E. THE VICE PRESIDENT (Naana Jane Opoku-Agyemang) */}
             <div className="flex flex-col items-center group">
-              <div className="w-80 h-80 mb-10 overflow-hidden rounded-xl border border-white/10 shadow-xl group-hover:scale-105 group-hover:shadow-2xl group-hover:shadow-orange-500/20 transition-all duration-300 relative bg-slate-800">
+              <div className="w-80 h-96 mb-10 overflow-hidden rounded-xl border border-white/10 shadow-xl group-hover:scale-105 group-hover:shadow-2xl group-hover:shadow-orange-500/20 transition-all duration-300 relative bg-slate-800">
                 <div className="absolute inset-0 rounded-xl border border-orange-500/0 group-hover:border-orange-500/30 transition-all duration-300 z-10"></div>
                 <div className="w-full h-full">
                   <img 
                     src="/assets/1.png" 
                     alt="Her Excellency Naana Jane Opoku-Agyemang" 
-                    className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-300" 
+                    className="w-full h-full object-cover object-top transition-all duration-300" 
                   />
                 </div>
               </div>
@@ -287,13 +287,13 @@ export default function LandingPage() {
 
             {/* CARD 3 - THE HON. MINISTER (Hon. Samuel Okudzeto Ablakwa) */}
             <div className="flex flex-col items-center group">
-              <div className="w-80 h-80 mb-10 overflow-hidden rounded-xl border border-white/10 shadow-xl group-hover:scale-105 group-hover:shadow-2xl group-hover:shadow-orange-500/20 transition-all duration-300 relative bg-slate-800">
+              <div className="w-80 h-96 mb-10 overflow-hidden rounded-xl border border-white/10 shadow-xl group-hover:scale-105 group-hover:shadow-2xl group-hover:shadow-orange-500/20 transition-all duration-300 relative bg-slate-800">
                 <div className="absolute inset-0 rounded-xl border border-orange-500/0 group-hover:border-orange-500/30 transition-all duration-300 z-10"></div>
                 <div className="w-full h-full">
                   <img 
                     src="/assets/3.jpg" 
                     alt="Hon. Samuel Okudzeto Ablakwa" 
-                    className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-300" 
+                    className="w-full h-full object-cover object-top transition-all duration-300" 
                   />
                 </div>
               </div>
