@@ -5,5 +5,4 @@ class RegistrationsConfig(AppConfig):
     name = 'registrations'
 
     def ready(self):
-        # This tells Django to listen for the email triggers!
-        import registrations.signals
+        pass

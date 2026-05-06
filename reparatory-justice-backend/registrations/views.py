@@ -1,30 +1,29 @@
-from rest_framework.generics import CreateAPIView, ListAPIView, RetrieveUpdateAPIView
-from rest_framework.permissions import AllowAny, IsAuthenticated
-from .models import Registration
-from .serializers import PublicRegistrationSerializer, AdminRegistrationSerializer
-from .permissions import IsRegistrationViewer, IsRegistrationEditor
+from rest_framework import viewsets
+from rest_framework.permissions import AllowAny
+from .models import PressRelease, ConsularService, DiplomaticMission
+from .serializers import PressReleaseSerializer, ConsularServiceSerializer, DiplomaticMissionSerializer
 
-class PublicRegistrationCreateView(CreateAPIView):
+class PressReleaseViewSet(viewsets.ReadOnlyModelViewSet):
     """
-    Public endpoint for submitting new registrations.
+    API endpoint that allows press releases to be viewed.
     """
-    queryset = Registration.objects.all()
-    serializer_class = PublicRegistrationSerializer
+    queryset = PressRelease.objects.filter(is_published=True).order_by('-date_published')
+    serializer_class = PressReleaseSerializer
     permission_classes = [AllowAny]
-    # Note: Rate limiting is handled globally via settings, but could be explicitly added here if needed.
+    lookup_field = 'slug'
 
-class AdminRegistrationListView(ListAPIView):
+class ConsularServiceViewSet(viewsets.ReadOnlyModelViewSet):
     """
-    Admin endpoint to list registrations.
+    API endpoint that allows consular services to be viewed.
     """
-    queryset = Registration.objects.all().order_by("-created_at")
-    serializer_class = AdminRegistrationSerializer
-    permission_classes = [IsAuthenticated]
+    queryset = ConsularService.objects.all().order_by('service_name')
+    serializer_class = ConsularServiceSerializer
+    permission_classes = [AllowAny]
 
-class AdminRegistrationDetailView(RetrieveUpdateAPIView):
+class DiplomaticMissionViewSet(viewsets.ReadOnlyModelViewSet):
     """
-    Admin endpoint to retrieve and update specific registrations.
+    API endpoint that allows diplomatic missions to be viewed.
     """
-    queryset = Registration.objects.all().order_by("-created_at")
-    serializer_class = AdminRegistrationSerializer
-    permission_classes = [IsAuthenticated]
+    queryset = DiplomaticMission.objects.all().order_by('country', 'city')
+    serializer_class = DiplomaticMissionSerializer
+    permission_classes = [AllowAny]

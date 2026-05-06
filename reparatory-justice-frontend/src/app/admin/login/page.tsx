@@ -2,12 +2,10 @@
 
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
-import { useLocale } from "next-intl";
 import { fetchApi } from "@/lib/apiClient";
 
 export default function AdminLogin() {
   const router = useRouter();
-  const locale = useLocale();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -27,7 +25,7 @@ export default function AdminLogin() {
       if (data.access && data.refresh) {
         localStorage.setItem("access_token", data.access);
         localStorage.setItem("refresh_token", data.refresh);
-        router.push(`/${locale}/admin`);
+        router.push(`/admin`);
       } else {
         setError("Invalid response from server.");
       }
@@ -45,7 +43,7 @@ export default function AdminLogin() {
       <div className="max-w-md w-full bg-white rounded-2xl shadow-2xl overflow-hidden z-10 relative">
         <div className="p-8 md:p-10">
           <div className="flex justify-center mb-6">
-            <div className="w-14 h-14 bg-orange-500 rounded-lg flex items-center justify-center text-[#051121] font-bold text-xl shadow-lg">
+            <div className="w-14 h-14 bg-slate-200 rounded-lg flex items-center justify-center text-[#051121] font-bold text-xl shadow-lg">
               MFA
             </div>
           </div>
@@ -66,7 +64,7 @@ export default function AdminLogin() {
                 type="text" 
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
-                className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:bg-white transition-colors"
+                className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#001b3d] focus:bg-white transition-colors"
                 placeholder="Enter your username"
                 required
               />
@@ -78,7 +76,7 @@ export default function AdminLogin() {
                 type="password" 
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:bg-white transition-colors"
+                className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#001b3d] focus:bg-white transition-colors"
                 placeholder="••••••••"
                 required
               />
@@ -87,7 +85,7 @@ export default function AdminLogin() {
             <button 
               type="submit" 
               disabled={loading}
-              className="w-full bg-orange-600 hover:bg-orange-500 text-white font-bold py-3.5 rounded-lg shadow-[0_0_15px_rgba(234,88,12,0.3)] transition-all disabled:opacity-70 flex items-center justify-center"
+              className="w-full bg-[#001b3d] hover:bg-slate-200 text-white font-bold py-3.5 rounded-lg shadow-[0_0_15px_rgba(0,27,61,0.3)] transition-all disabled:opacity-70 flex items-center justify-center"
             >
               {loading ? (
                 <svg className="animate-spin h-5 w-5 text-white" fill="none" viewBox="0 0 24 24">

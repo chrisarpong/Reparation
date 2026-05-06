@@ -2,11 +2,9 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { useLocale } from "next-intl";
 import { fetchApi } from "@/lib/apiClient";
 
 export default function AdminDashboard() {
-  const locale = useLocale();
   const [activeTab, setActiveTab] = useState("Delegates");
   const [delegates, setDelegates] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
@@ -28,7 +26,7 @@ export default function AdminDashboard() {
         console.error("Failed to fetch delegates:", error);
         if (error.message && error.message.includes("401") || error.message.toLowerCase().includes("unauthorized") || error.message.toLowerCase().includes("authentication credentials were not provided")) {
           // If unauthorized, redirect to login
-          window.location.href = `/${locale}/admin/login`;
+          window.location.href = `/admin/login`;
         }
         setLoading(false);
       });
@@ -104,7 +102,7 @@ export default function AdminDashboard() {
         <div>
           <div className="h-20 flex items-center px-6 border-b border-white/10">
             <div className="flex items-center gap-3">
-              <div className="w-8 h-8 bg-orange-500 rounded text-[#051121] font-bold flex items-center justify-center text-xs">
+              <div className="w-8 h-8 bg-white rounded text-[#051121] font-bold flex items-center justify-center text-xs">
                 MFA
               </div>
               <span className="text-white font-bold tracking-wide">Protocol Portal</span>
@@ -116,7 +114,7 @@ export default function AdminDashboard() {
               onClick={() => setActiveTab("Delegates")}
               className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-colors ${
                 activeTab === "Delegates" 
-                  ? "bg-orange-500/10 text-orange-400" 
+                  ? "bg-white/10 text-white" 
                   : "text-slate-400 hover:bg-white/5 hover:text-white"
               }`}
             >
@@ -128,7 +126,7 @@ export default function AdminDashboard() {
               onClick={() => setActiveTab("Settings")}
               className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-colors ${
                 activeTab === "Settings" 
-                  ? "bg-orange-500/10 text-orange-400" 
+                  ? "bg-white/10 text-white" 
                   : "text-slate-400 hover:bg-white/5 hover:text-white"
               }`}
             >
@@ -139,7 +137,7 @@ export default function AdminDashboard() {
         </div>
         
         <div className="p-4 border-t border-white/10">
-          <Link href={`/${locale}`} className="flex items-center gap-3 text-sm text-slate-400 hover:text-white transition-colors">
+          <Link href="/" className="flex items-center gap-3 text-sm text-slate-400 hover:text-white transition-colors">
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" /></svg>
             Back to Public Site
           </Link>
@@ -178,7 +176,7 @@ export default function AdminDashboard() {
                   </div>
                   <div className="bg-white px-6 py-4 rounded-xl border border-slate-200 shadow-sm min-w-[160px]">
                     <p className="text-slate-500 text-xs font-bold uppercase tracking-wider mb-1">Pending Approval</p>
-                    <p className="text-3xl font-extrabold text-orange-500">
+                    <p className="text-3xl font-extrabold text-[#001b3d]">
                       {delegates.filter(d => (d.status || "Pending") === "Pending").length}
                     </p>
                   </div>
@@ -190,7 +188,7 @@ export default function AdminDashboard() {
                     placeholder="Search delegates..." 
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="px-4 py-2 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-orange-500 w-64 shadow-sm"
+                    className="px-4 py-2 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#001b3d] w-64 shadow-sm"
                   />
                   <button onClick={handleExportCSV} className="bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded-lg text-sm font-semibold transition-colors flex items-center gap-2 shadow-sm">
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" /></svg>
@@ -266,7 +264,7 @@ export default function AdminDashboard() {
                           <td className="py-4 px-6 text-right">
                             <button 
                               onClick={() => openModal(delegate)}
-                              className="text-sm text-orange-600 font-bold hover:text-orange-700 transition-colors bg-orange-50 hover:bg-orange-100 px-3 py-1.5 rounded-md"
+                              className="text-sm text-[#001b3d] font-bold hover:text-blue-900 transition-colors bg-blue-50 hover:bg-blue-100 px-3 py-1.5 rounded-md"
                             >
                               Review
                             </button>
